@@ -1,0 +1,75 @@
+{
+  "name": "duck-snap",
+  "version": "1.0.0",
+  "description": "Gerenciador de snapshots versionados para projetos locais",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run dev:react\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev:react": "BROWSER=none react-scripts start",
+    "build:react": "react-scripts build",
+    "build": "npm run build:react && electron-builder",
+    "dist": "npm run build:react && electron-builder --publish=never"
+  },
+  "keywords": [
+    "electron",
+    "snapshots",
+    "version-control",
+    "backup"
+  ],
+  "author": "Felipe Penha",
+  "license": "MIT",
+  "dependencies": {
+    "@headlessui/react": "^2.2.7",
+    "@heroicons/react": "^2.2.0",
+    "archiver": "^6.0.1",
+    "autoprefixer": "^10.4.21",
+    "electron-is-dev": "^2.0.0",
+    "framer-motion": "^12.23.12",
+    "postcss": "^8.5.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-icons": "^4.12.0",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^28.1.0",
+    "electron-builder": "^24.9.1",
+    "react-scripts": "^5.0.1",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.duck.snap",
+    "productName": "Duck Snap",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/main/**/*",
+      "src/backend/**/*",
+      "src/preload/**/*",
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  },
+  "browserslist": {
+    "production": [
+      "last 1 electron version"
+    ],
+    "development": [
+      "last 1 electron version"
+    ]
+  }
+}

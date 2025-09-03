@@ -2,6 +2,8 @@
 
 Aplicativo desktop para criar snapshots versionados de projetos locais - Uma alternativa simples ao Git para projetos em desenvolvimento inicial.
 
+![DuckSnap Screenshot](./assets/screenshot.png)
+
 ## Funcionalidades
 
 - **Drag & Drop** - Arraste pastas para criar snapshots instantâneos

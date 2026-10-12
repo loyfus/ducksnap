@@ -37,6 +37,21 @@ pool. Num app desktop de uso local, a complexidade assíncrona não se paga.
 **Electron em vez de Tauri.** O time de build é bem mais directo com Electron; a
 troca por Tauri só compensaria depois de sentir o peso do pacote.
 
+## Arquitetura
+
+```
+src/
+├── main/       processo principal do Electron (janela, ciclo de vida)
+├── preload/    a ponte entre main e renderer — contextIsolation ligado
+├── backend/    snapshotManager: criar, listar, comparar e exportar
+├── components/ Header, SnapshotCard, Notification
+└── App.js      estado da interface
+```
+
+O `preload` é o único caminho entre a interface e o disco. A renderer nunca
+toca em arquivo: pede, e o processo principal responde. É o que mantém
+`contextIsolation` ligado sem transformar cada ação em um IPC.
+
 ## Rodar
 
 ```bash

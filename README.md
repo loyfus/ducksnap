@@ -1,49 +1,59 @@
-# DuckSnap 🦆
+# DuckSnap
 
-Aplicativo desktop para criar snapshots versionados de projetos locais - Uma alternativa simples ao Git para projetos em desenvolvimento inicial.
+Aplicativo desktop para criar snapshots versionados de projetos locais — uma
+alternativa simples ao Git para quem está no começo do projeto e ainda não quer
+versionar tudo.
 
-![DuckSnap Screenshot](./assets/screenshot.png)
+![Electron](https://img.shields.io/badge/Electron-47848F?style=flat-square&logo=electron&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black)
+![SQLite](https://img.shields.io/badge/SQLite-better--sqlite3-003B57?style=flat-square&logo=sqlite&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-F05138?style=flat-square)
 
-## Funcionalidades
+![DuckSnap](./assets/screenshot.png)
 
-- **Drag & Drop** - Arraste pastas para criar snapshots instantâneos
-- **Versionamento automático** - Sugestão inteligente de versões
-- **Comparação de versões** - Compare tamanho e arquivos entre snapshots
-- **Exportação em lote** - Exporte todos os snapshots de um projeto
+## O problema
 
-## Instalação
+No começo de um projeto, o Git cobra caro pela flexibilidade: preciso escrever
+mensagem, pensar em `.gitignore`, decidir o que entra. Quem só quer voltar a
+ontem à tarde não quer esse ritual — quer arrastar a pasta e ter um ponto de
+retorno.
+
+## O que faz
+
+- **Arrastar e soltar** — arraste uma pasta para criar o snapshot na hora
+- **Comparação** — veja o que mudou entre dois snapshots, em arquivos e tamanho
+- **Exportação em lote** — leve todos os snapshots de um projeto de uma vez
+
+## Decisões
+
+**SQLite em vez de arquivos soltos.** Cada snapshot é um registro com metadados
+de tamanho e contagem de arquivos, e o conteúdo vai comprimido num `.zip`
+disso. Consultar "quais snapshots existem e quanto pesam" vira uma query em vez
+de percorrer o disco.
+
+**`better-sqlite3`, síncrono.** É uma API síncrona e simples, sem callback nem
+pool. Num app desktop de uso local, a complexidade assíncrona não se paga.
+
+**Electron em vez de Tauri.** O time de build é bem mais directo com Electron; a
+troca por Tauri só compensaria depois de sentir o peso do pacote.
+
+## Rodar
 
 ```bash
-# Clone o repositório
-git clone https://github.com/loyfus/duckSnap.git
-cd duckSnap
-
-# Instale as dependências
 npm install
-
-# Execute em desenvolvimento
-npm run dev
+npm run dev      # sobe o Vite e abre o Electron
+npm run dist     # gera o executável para a plataforma atual
 ```
 
-## Como usar
+## Stack
 
-1. **Criar Snapshot**: Arraste uma pasta ou clique para selecionar
-2. **Gerenciar**: Visualize, compare e exclua snapshots na interface
-3. **Exportar**: Selecione um projeto e exporte todos os snapshots
-
-## Tecnologias
-
-- Electron + React
-- SQLite (better-sqlite3)
-- Tailwind CSS
-- Archiver para compactação
-
-## Build
-
-```bash
-npm run dist  # Gera executável para sua plataforma
-```
+| | |
+| --- | --- |
+| Shell | Electron |
+| UI | React + Tailwind CSS |
+| Persistência | SQLite via better-sqlite3 |
+| Compressão | Archiver |
 
 ## Licença
 
-MIT
+MIT — [LICENSE](LICENSE).

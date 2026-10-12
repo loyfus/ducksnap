@@ -1,5 +1,5 @@
 {
-  "name": "duck-snap",
+  "name": "ducksnap",
   "version": "1.0.0",
   "description": "Gerenciador de snapshots versionados para projetos locais",
   "main": "src/main/main.js",

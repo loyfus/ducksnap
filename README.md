@@ -11,6 +11,9 @@ versionar tudo.
 
 ![DuckSnap](./assets/screenshot.png)
 
+> **Contexto.** Projeto de estudo — não está em produção. Exercita a separação de processo do
+> Electron: renderer isolado, acesso ao disco só pelo `preload`.
+
 ## O problema
 
 No começo de um projeto, o Git cobra caro pela flexibilidade: preciso escrever
